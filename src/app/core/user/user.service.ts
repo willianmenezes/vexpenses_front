@@ -41,8 +41,6 @@ export class UserService {
 
     // decodifica o token e formata seus dados
     decodeJWT() {
-        console.log('jwt');
-        
         const token = this.tokenService.getToken();
         const user = jwt_decode(token) as DataUserToken;
 

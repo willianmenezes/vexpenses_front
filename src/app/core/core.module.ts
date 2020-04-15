@@ -3,14 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { MenuAplicacao } from './menu-aplicacao/menu-aplicacao.component';
+import { AgendaComponent } from './agendas/agenda/agenda.component';
+import { ListaAgendasComponent } from './agendas/lista-agendas/lista-agendas.component';
+
 @NgModule({
     declarations: [
-       
+        MenuAplicacao,
+        AgendaComponent,
+        ListaAgendasComponent
     ],
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        RouterModule    ],
+        RouterModule],
     exports: []
 })
 export class CoreModule {

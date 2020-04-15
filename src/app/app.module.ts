@@ -23,7 +23,8 @@ import { LoadingModule } from './shared/loading/loading.module';
     CoreModule,
     LoadingModule
   ],
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptor,
     multi: true
