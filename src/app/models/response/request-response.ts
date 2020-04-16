@@ -3,5 +3,5 @@ export interface RequestResponse {
 }
 
 export interface RequestResponseType<T> extends RequestResponse{
-    resposta : T;
+    response : T;
 }

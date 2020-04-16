@@ -6,10 +6,9 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse ml-4" id="navbarNav">
+            <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['agendas']">Agendas</a>
                     </li>
                 </ul>
                 <div class="btn-group">
@@ -18,7 +17,6 @@
                         {{apelidoUsuario}}
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button" data-toggle="modal" data-target="#modalTrocarSenha">Alterar senha</button>
                         <button class="dropdown-item" type="button" (click)="sair()">Sair</button>
                     </div>
                 </div>

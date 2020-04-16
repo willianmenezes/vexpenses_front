@@ -1,4 +1,4 @@
-import { TipoAgendaResponse } from './tipoAgendaResponse';
+import { TipoAgendaResponse } from './response/tipo-agenda-response';
 
 export interface AgendaResponse {
     agendaId : string,

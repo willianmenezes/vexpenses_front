@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
                 let token: Token = response as Token;
 
                 if (token.autenticado === true) {
-                    alertfy.success('Login realizado com sucesso.');
+                    // alertfy.success('Login realizado com sucesso.');
                     this.router.navigate(['home']);
                 } else if (token.autenticado === false) {
                     alertfy.error('Usuário ou senha invalildos.');

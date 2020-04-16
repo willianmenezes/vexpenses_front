@@ -1,0 +1,68 @@
+<div class="card  mt-3 ml-3 mb-3 mr-0 shadow small">
+    <div class="card-header h6 d-flex justify-content-between" type="button" (click)="buscarDadosContato(divCard)">
+        {{contatoInput.nome}}
+    </div>
+    <div #divCard class="card-body text-dark d-none">
+        <div class="p-1">
+            <div class="d-flex justify-content-between">
+                <h5>Contato</h5>
+                <div>
+                    <button class="btn btn-sm btn-warning ">
+                        <i class="far fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger ml-1">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                </div>
+            </div>
+
+            <hr>
+            <strong>Nome: </strong> {{contatoInput.nome}} <br>
+            <strong>Sobrenome: </strong> {{contatoInput.nome}} <br>
+            <strong>Email: </strong> {{contatoInput.nome}} <br> <br>
+
+            <h5>Telefones</h5>
+            <hr>
+            <div *ngFor="let telefone of contatoInput?.telefone; index as i">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>Numero {{i + 1}}: </strong>({{telefone.ddd}}) {{telefone.numero}}
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-warning ">
+                            <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger ml-1">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <h5>Endereços</h5>
+            <hr>
+            <div *ngFor="let endereco of contatoInput?.endereco; index as i">
+                <strong>Rua: </strong> {{endereco.logradouro}} <br>
+                <strong>Bairro: </strong> {{endereco.bairro}} <br>
+                <strong>Cidade: </strong> {{endereco.localidade}} <br>
+                <strong>Estado: </strong> {{endereco.uf}} <br>
+                <strong>Complemento: </strong> {{endereco.complemento}} <br>
+                <div  class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>CEP: </strong> {{endereco.cep}}
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-warning ">
+                            <i class="far fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-danger ml-1">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <!-- <button class="btn btn-dark m-2" [routerLink]="['/home/contatos', contatoInput.agendaId]">Contatos</button> -->
+</div>

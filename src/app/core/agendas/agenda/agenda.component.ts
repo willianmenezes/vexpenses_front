@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Renderer2 } from '@angular/core';
 
 import { AgendaResponse } from 'src/app/models/agendaResponse';
+
+declare const $ : any;
 
 @Component({
     selector: 'app-agenda',
@@ -9,11 +11,13 @@ import { AgendaResponse } from 'src/app/models/agendaResponse';
 })
 export class AgendaComponent {
     // recebe os dados do pai de uma sala para usar no template
-    @Input() agendaInput: AgendaResponse ;
+    @Input() agendaInput: AgendaResponse;
 
-    constructor() { }
+    constructor() {
+    }
 
     ngOnInit(): void {
         console.log(this.agendaInput);
+
     }
 }

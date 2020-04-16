@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
     templateUrl: './menu-aplicacao.component.html',
     styleUrls: ['./menu-aplicacao.component.css']
 })
-export class MenuAplicacao {
+export class MenuAplicacaoComponent {
 
     apelidoUsuario: string
 

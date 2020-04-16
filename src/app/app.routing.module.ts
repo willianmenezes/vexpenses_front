@@ -6,7 +6,7 @@ import { LoginGuard } from './core/auth/login.guard';
 import { AuthGuard } from './core/auth/auth.guard';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { NotAuthorizedComponent } from './errors/not-authorized/not-authorized.component';
-import { MenuAplicacao } from './core/menu-aplicacao/menu-aplicacao.component';
+import { MenuAplicacaoComponent } from './core/menu-aplicacao/menu-aplicacao.component';
 import { ListaAgendasComponent } from './core/agendas/lista-agendas/lista-agendas.component';
 import { ListaAgendasResolver } from './core/agendas/lista-agendas/lista-agendas.resolver';
 import { ListaContatosComponent } from './core/contatos/lista-contatos/lista-contatos.component';
@@ -25,7 +25,7 @@ export const routes: Routes = [
     },
     {
         path: 'home',
-        component: MenuAplicacao,
+        component: MenuAplicacaoComponent,
         canActivate: [AuthGuard],
         children: [
             {
