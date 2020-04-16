@@ -1,9 +1,19 @@
 <div class="card  mt-3 ml-3 mb-3 mr-0 shadow">
-    <div class="card-header h6">{{agendaInput.nome}}</div>
+    <div class="d-flex justify-content-between">
+    </div>
+    <div class="card-header h6">
+        <div class="d-flex justify-content-between align-items-center">
+            {{agendaInput.nome}}
+            <div>
+                <button class="btn btn-sm btn-danger ml-1" (click)="excluiAgenda(agendaInput.agendaId)">
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </div>
     <div class="card-body text-dark">
         <div class="p-1">
             <strong>Descrição: </strong> {{agendaInput.descricao}} <br>
-
         </div>
     </div>
     <button class="btn btn-dark m-2" [routerLink]="['/home/contatos', agendaInput.agendaId]">Contatos</button>

@@ -15,6 +15,8 @@ import { AgendaRequest } from 'src/app/models/request/agenda-request';
 })
 export class AgendasService {
 
+    statusAgenda = new BehaviorSubject<boolean>(null);
+
     constructor(private http: HttpClient) { }
 
     getAgendas(paginacao: PaginationRequest) {
@@ -28,5 +30,17 @@ export class AgendasService {
 
     cadastrarAgenda(agenda: AgendaRequest) {
         return this.http.post<RequestResponse>(`${URL_API}agenda`, { ...agenda }, { observe: 'body' })
+    }
+
+    excluirAgenda(agendaId: string) {
+        return this.http.delete<RequestResponse>(`${URL_API}agenda/${agendaId}`, { observe: 'body' });
+    }
+
+    getStatusAgenda(){
+        return this.statusAgenda.asObservable();
+    }
+
+    setStatusAgenda(){
+        this.statusAgenda.next(true);
     }
 }

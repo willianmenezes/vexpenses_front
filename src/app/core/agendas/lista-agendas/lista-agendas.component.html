@@ -24,41 +24,40 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Cadastrar sala</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <form [formGroup]="formCadastrar"  (submit)="cadastrarAgenda()">
+            <form [formGroup]="formCadastrar" (submit)="cadastrarAgenda()">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="nome" class="small font-weight-bold">Nome :</label>
+                                <label for="nome" class="font-weight-bold">Nome :</label>
                                 <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
                                     placeholder="Mín. 3 caracteres" formControlName="nome">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="descricao" class="small font-weight-bold">Descrição:</label>
+                                <label for="descricao" class=" font-weight-bold">Descrição:</label>
                                 <input type="text" class="form-control" id="descricao" aria-describedby="emailHelp"
-                                   formControlName="descricao" placeholder="Mín. 3 caracteres">
+                                    formControlName="descricao" placeholder="Mín. 3 caracteres">
                             </div>
                         </div>
                         <div class="col-12 form-group">
                             <label for="tipoAgendaId" class="font-weight-bold">Tipo de agenda:</label>
-                            <select class="form-control" id="tipoAgendaId" formControlName="tipoAgendaId" placeholder="Tipo de agenda">
+                            <select class="form-control" id="tipoAgendaId" formControlName="tipoAgendaId"
+                                placeholder="Tipo de agenda">
                                 <option value="" selected>Selecione</option>
-                                <option *ngFor="let tipoAgenda of tiposAgenda" value={{tipoAgenda.tipoAgendaId}}>{{tipoAgenda.descricao}}</option>
+                                <option *ngFor="let tipoAgenda of tiposAgenda" value={{tipoAgenda.tipoAgendaId}}>
+                                    {{tipoAgenda.descricao}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"
+                        (click)="limparClassesErros()">Fechar</button>
                     <button type="submit" class="btn btn-primary" [disabled]="formCadastrar.invalid">Salvar</button>
                 </div>
             </form>
+        </div>
     </div>
-</div>
-</div>

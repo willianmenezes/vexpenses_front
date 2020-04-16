@@ -32,7 +32,15 @@ export class ListaAgendasComponent implements OnInit {
         private agendaService: AgendasService,
         private route: ActivatedRoute,
         private fb: FormBuilder
-    ) { }
+    ) {
+        this.agendaService
+            .getStatusAgenda()
+            .subscribe((response) => {
+                if (response) {
+                    this.buscaAgendas();
+                }
+            })
+    }
 
     ngOnInit(): void {
 
@@ -123,5 +131,9 @@ export class ListaAgendasComponent implements OnInit {
                 alertfy.error(err.error.mensagem);
                 console.log(err);
             });
+    }
+
+    limparClassesErros() {
+        this.formCadastrar.reset();
     }
 }

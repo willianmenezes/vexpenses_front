@@ -3,9 +3,9 @@
         <div>
             <h2>Contatos</h2>
         </div>
-        <!-- <div>
-            <button class="btn btn-dark btn-sm" data-toggle="modal" data-target="#modalCadastrarSala">Cadastrar</button>
-        </div> -->
+        <div>
+            <button class="btn btn-dark" data-toggle="modal" data-target="#modalCadastrarContato">Cadastrar</button>
+        </div>
     </div>
     <div class="col-12">
         <hr>
@@ -14,5 +14,174 @@
 <div class="row m-0 mr-3">
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 m-0 p-0" *ngFor="let contato of contatos">
         <app-contato [contatoInput]="contato"></app-contato>
+    </div>
+</div>
+
+
+<!-- Modal cadastrar contato-->
+<div class="modal fade" id="modalCadastrarContato" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content" *ngIf="mostrarContato">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar contato</h5>
+            </div>
+            <form [formGroup]="formCadastrarContato" (submit)="cadastrarContato()">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="nome" class="font-weight-bold">Nome :</label>
+                                <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
+                                    placeholder="Mín. 3 caracteres" formControlName="nome">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="sobrenome" class="font-weight-bold">Sobrenome:</label>
+                                <input type="text" class="form-control" id="sobrenome" aria-describedby="emailHelp"
+                                    formControlName="sobrenome" placeholder="Mín. 3 caracteres">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="email" class="font-weight-bold">Email:</label>
+                                <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                                    formControlName="email" placeholder="Mín. 3 caracteres">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal"
+                        (click)="limparClassesErros()">Fechar</button>
+                    <button type="submit" class="btn btn-sm btn-primary"
+                        [disabled]="formCadastrarContato.invalid">Salvar</button>
+                </div>
+            </form>
+        </div>
+        <!-- Corpo telefone -->
+        <div class="modal-content " *ngIf="mostrarTelefone">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Telefones</h5>
+            </div>
+            <form [formGroup]="formCadastrarTelefone">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="ddd" class="font-weight-bold">DDD :</label>
+                                <input type="text" class="form-control" id="ddd" aria-describedby="emailHelp"
+                                    placeholder="DDD" formControlName="ddd">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="numero" class="font-weight-bold">Telefone:</label>
+                                <input type="text" class="form-control" id="numero" aria-describedby="emailHelp"
+                                    formControlName="numero" placeholder="Mín. 3 caracteres">
+                            </div>
+                        </div>
+                        <div class="col-12 form-group">
+                            <label for="tipoTelefoneId" class="font-weight-bold">Tipo de Telefone:</label>
+                            <select class="form-control" id="tipoTelefoneId" formControlName="tipoTelefoneId"
+                                placeholder="Tipo de agenda">
+                                <option value="" selected>Selecione</option>
+                                <option *ngFor="let tipoTelefone of tiposTelefone"
+                                    value={{tipoTelefone.tipoTelefoneId}}>{{tipoTelefone.descricao}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="listaTelefonesString?.length > 0">
+                        <label for="exampleFormControlTextarea2" class="font-weight-bold">Resumo telefones para
+                            cadastro</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"
+                            disabled>{{listaTelefonesString}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal"
+                        (click)="limparClassesErros()">Fechar</button>
+
+                    <button (click)="adicioanrTelefone()" class="btn btn-sm btn-primary"
+                        [disabled]="formCadastrarEndereco.invalid">Adicionar telefone</button>
+
+                    <button type="submit" class="btn btn-sm btn-primary" [disabled]="formCadastrarTelefone.invalid"
+                        (click)="cadastrarTelefone()" *ngIf="habilitaSalvarTelefone">Salvar</button>
+                </div>
+            </form>
+        </div>
+        <!-- Corpo endereço -->
+        <div class="modal-content" *ngIf="mostrarEndereco">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar endereços</h5>
+            </div>
+            <form [formGroup]="formCadastrarEndereco">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="cep" class="font-weight-bold">CEP :</label>
+                                <input type="text" class="form-control" id="cep" aria-describedby="emailHelp" (keyup)="buscarEnderecoCep($event.target.value)"
+                                    placeholder="CEP" formControlName="cep">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="logradouro" class="font-weight-bold">Rua:</label>
+                                <input type="text" class="form-control" id="logradouro" aria-describedby="emailHelp"
+                                    formControlName="logradouro" placeholder="Rua">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="bairro" class="font-weight-bold">Bairro:</label>
+                                <input type="text" class="form-control" id="bairro" aria-describedby="emailHelp"
+                                    formControlName="bairro" placeholder="Bairro">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="complemento" class="font-weight-bold">Complemento:</label>
+                                <input type="text" class="form-control" id="complemento" aria-describedby="emailHelp"
+                                    formControlName="complemento" placeholder="Complemento">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="localidade" class="font-weight-bold">Cidade:</label>
+                                <input type="text" class="form-control" id="localidade" aria-describedby="emailHelp"
+                                    formControlName="localidade" placeholder="Cidade">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label for="uf" class="font-weight-bold">Estado:</label>
+                                <input type="text" class="form-control" id="uf" aria-describedby="emailHelp"
+                                    formControlName="uf" placeholder="Estado">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" *ngIf="listaEnderecosString?.length > 0">
+                        <label for="exampleFormControlTextarea1" class="font-weight-bold">Resumo endereços para
+                            cadastro</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                            disabled>{{listaEnderecosString}}</textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal"
+                        (click)="limparClassesErros()">Fechar</button>
+
+                    <button (click)="adicioanrEndereco()" class="btn btn-sm btn-primary"
+                        [disabled]="formCadastrarEndereco.invalid">Adicionar Endereço</button>
+
+                    <button type="submit" class="btn btn-sm btn-primary" [disabled]="formCadastrarEndereco.invalid"
+                        (click)="cadastrarEndereco()" *ngIf="habilitaSalvarEndereco">Salvar</button>
+
+                </div>
+            </form>
+        </div>
     </div>
 </div>
